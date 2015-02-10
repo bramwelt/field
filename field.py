@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 """
 Field - extract fields from a file
-Copyright (C) 2015 Trevor Bramwell 
+Copyright (C) 2015 Trevor Bramwell
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -34,7 +34,6 @@ parser.add_argument(
         '-d', '--delimiter', default=None,
         help='delimiter between fields', type=str)
 
-
 args = parser.parse_args()
 filehandle = args.filename
 delim = args.delimiter
@@ -50,5 +49,5 @@ fields = ((line[c-1] for c in columns) for line in lines if max(columns) <= len(
 
 for line in fields:
     print ' '.join(line)
-        
+
 args.filename.close()
