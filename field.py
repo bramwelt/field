@@ -20,7 +20,7 @@ import sys
 from argparse import ArgumentParser, FileType
 
 
-parser = ArgumentParser(description='Extract fields from a stream.')
+parser = ArgumentParser(description='Extract fields from a file.')
 
 parser.add_argument(
     '-f', '--file', dest='filename', metavar='FILE', default=sys.stdin,
