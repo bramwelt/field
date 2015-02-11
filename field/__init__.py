@@ -1,4 +1,3 @@
-#! /usr/bin/env python
 """
 Field - extract fields from a file
 Copyright (C) 2015 Trevor Bramwell
@@ -34,20 +33,24 @@ parser.add_argument(
         '-d', '--delimiter', default=None,
         help='delimiter between fields', type=str)
 
-args = parser.parse_args()
-filehandle = args.filename
-delim = args.delimiter
-columns = args.columns[0]
+def main():
+    """
+    Main Entry Point
+    """
+    args = parser.parse_args()
+    filehandle = args.filename
+    delim = args.delimiter
+    columns = args.columns[0]
 
-if not columns:
-    for line in filehandle:
-        print line,
-    exit(0)
+    if not columns:
+        for line in filehandle:
+            print line,
+        exit(0)
 
-lines = (line.strip('\n').split(delim) for line in filehandle)
-fields = ((line[c-1] for c in columns) for line in lines if max(columns) <= len(line))
+    lines = (line.strip('\n').split(delim) for line in filehandle)
+    fields = ((line[c-1] for c in columns) for line in lines if max(columns) <= len(line))
 
-for line in fields:
-    print ' '.join(line)
+    for line in fields:
+        print ' '.join(line)
 
-args.filename.close()
+    args.filename.close()
