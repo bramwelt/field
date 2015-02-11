@@ -1,0 +1,8 @@
+# Python build directory
+build/
+
+# Python distribution directory
+dist/
+
+# Python egg-info directory
+field.egg-info/
