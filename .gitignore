@@ -6,3 +6,6 @@ dist/
 
 # Python egg-info directory
 field.egg-info/
+
+# Python compiled files
+*.pyc
