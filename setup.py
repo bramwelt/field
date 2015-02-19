@@ -38,7 +38,7 @@ setup(
         'Topic :: Text Processing :: Filters'
     ],
     install_requires=[],
-    long_description=open("README.md").read(),
+    long_description=open("README.rst").read(),
     entry_points={
         'console_scripts': [
             'field=field:main',
