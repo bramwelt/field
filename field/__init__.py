@@ -26,12 +26,12 @@ parser.add_argument(
     type=FileType('r'), help='the file where fields come from')
 
 parser.add_argument(
-        'columns', default=None, action='append',
-        nargs='*', type=int)
+    'columns', default=None, action='append',
+    nargs='*', type=int)
 
 parser.add_argument(
-        '-d', '--delimiter', default=None,
-        help='delimiter between fields', type=str)
+    '-d', '--delimiter', default=None,
+    help='delimiter between fields', type=str)
 
 def main():
     """
