@@ -33,6 +33,19 @@ parser.add_argument(
     '-d', '--delimiter', default=None,
     help='delimiter between fields', type=str)
 
+
+def split_lines(filehandle, delim):
+    for line in filehandle:
+        yield line.strip('\n').split(delim)
+
+
+def extract_fields(filehandle, delim, columns):
+    lines = split_lines(filehandle, delim)
+    for line in lines:
+        if max(columns) <= len(line):
+            yield (line[c-1] for c in columns)
+
+
 def main():
     """
     Main Entry Point
@@ -47,8 +60,7 @@ def main():
             print line,
         exit(0)
 
-    lines = (line.strip('\n').split(delim) for line in filehandle)
-    fields = ((line[c-1] for c in columns) for line in lines if max(columns) <= len(line))
+    fields = extract_fields(filehandle, delim, columns)
 
     for line in fields:
         print ' '.join(line)
