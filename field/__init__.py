@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 import sys
 from argparse import ArgumentParser, FileType
+from itertools import chain
 
 
 parser = ArgumentParser(description='Extract fields from a file.')
@@ -25,26 +26,56 @@ parser.add_argument(
     '-f', '--file', dest='filename', metavar='FILE', default=sys.stdin,
     type=FileType('r'), help='the file where fields come from')
 
+def column_converter(string):
+    """
+    Converts column arguments to integers.
+
+    - Accepts columns in form of INT, or the range INT-INT.
+    - Returns either a list of integers or a single integer.
+    """
+    # TODO: Doesn't work on input: "4,3, 2,1"
+    column = string.strip(',')
+    if '-' in column:
+        column_range = map(int, column.split('-'))
+        # For decreasing ranges, increment the larger value, reverse the
+        # passing to range (so it will accept the input), and finally
+        # reverse the output ([::-1])
+        if column_range[0] > column_range[1]:
+            column_range[0] += 1
+            return [i for i in range(*column_range[::-1])][::-1]
+        # For normal ranges, increment the larger value.
+        column_range[1] += 1
+        return [i for i in range(*column_range)]
+    if ',' in column:
+        columns = string.split(',')
+        return map(int, columns)
+    return [int(column)]
+
 parser.add_argument(
     'columns', default=None, action='append',
-    nargs='*', type=int)
+    nargs='*', type=column_converter)
 
 parser.add_argument(
     '-d', '--delimiter', default=None,
     help='delimiter between fields', type=str)
 
 
-def split_lines(filehandle, delim):
-    for line in filehandle:
-        yield line.strip('\n').split(delim)
+def split_line(lines, delim):
+    yield lines.strip('\n').split(delim)
 
 
-def extract_fields(filehandle, delim, columns):
-    lines = split_lines(filehandle, delim)
-    for line in lines:
-        if max(columns) <= len(line):
-            yield (line[c-1] for c in columns)
+def extract_fields(lines, delim, columns):
+    for line in split_line(lines, delim):
+        for c in columns:
+            if check_columns(c, line, columns):
+                yield line[c-1]
 
+def check_columns(column, line, columns):
+    """
+    Make sure the column is the minimum between the largest column asked
+    for and the max column available in the line.
+    """
+    return column <= min(len(line), max(columns))
 
 def main():
     """
@@ -60,7 +91,8 @@ def main():
             print line,
         exit(0)
 
-    fields = extract_fields(filehandle, delim, columns)
+    cs = list(chain.from_iterable(columns))
+    fields = (extract_fields(line, delim, cs) for line in filehandle)
 
     for line in fields:
         print ' '.join(line)
