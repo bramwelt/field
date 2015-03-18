@@ -31,9 +31,8 @@ def column_converter(string):
     Converts column arguments to integers.
 
     - Accepts columns in form of INT, or the range INT-INT.
-    - Returns either a list of integers or a single integer.
+    - Returns a list of one or more integers.
     """
-    # TODO: Doesn't work on input: "4,3, 2,1"
     column = string.strip(',')
     if '-' in column:
         column_range = map(int, column.split('-'))
@@ -47,7 +46,7 @@ def column_converter(string):
         column_range[1] += 1
         return [i for i in range(*column_range)]
     if ',' in column:
-        columns = string.split(',')
+        columns = column.split(',')
         return map(int, columns)
     return [int(column)]
 
