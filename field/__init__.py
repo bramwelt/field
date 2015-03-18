@@ -16,11 +16,31 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 import sys
-from argparse import ArgumentParser, FileType
+import textwrap
+from argparse import (ArgumentParser, RawDescriptionHelpFormatter,
+    FileType)
 from itertools import chain
 
 
-parser = ArgumentParser(description='Extract fields from a file.')
+field_version='0.1.0'
+license_text="""
+    Copyright (C) 2015 Trevor Bramwell
+    License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
+    This is free software: you are free to change and redistribute it.
+    There is NO WARRANTY, to the extent permitted by law.
+"""
+
+parser = ArgumentParser(
+    formatter_class=RawDescriptionHelpFormatter,
+    description='Extract fields from a file.',
+    epilog=textwrap.dedent(license_text)
+)
+
+parser.add_argument('--version',
+        action='version',
+        version="field %s%s\nWritten by Trevor Bramwell." %
+            (field_version, textwrap.dedent(license_text)),
+        help='dislay the version number and exit')
 
 parser.add_argument(
     '-f', '--file', dest='filename', metavar='FILE', default=sys.stdin,
