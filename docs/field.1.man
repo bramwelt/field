@@ -1,0 +1,53 @@
+.TH FIELD "1" "March 2015" "field 0.1.0" "User Commands"
+.SH NAME
+field \- extract fields from a file
+.SH SYNOPSIS
+.B field
+[\-f \fIFILE\fR] [\-d \fIDELIMITER\fR] [\fICOLUMN\fR ...]
+.SH DESCRIPTION
+.PP
+Field extracts a list of fields or columns from a file. It is a simpler
+version of:
+.PP
+.B \tawk '{ print $1; }'
+.PP
+Default is to read whitespace (<space><tab>) delimited text from
+\fIstdin\fR and write fields to \fIstdout\fR.
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+show concise list of options and exit
+.TP
+\fB\-\-version\fR
+dislay version information and exit
+.TP
+\fB\-f\fR, \fB\-\-file\fR FILE
+the file where fields come from
+.TP
+\fB\-d\fR, \fB\-\-delimiter\fR DELIMITER
+character delimiter between fields
+.SH EXAMPLES
+.nf
+.B $ mount | field 5 3 1
+ext4 / /dev/mapper/sda7_crypt
+proc /proc proc
+sysfs /sys sysfs
+
+.B $ ls -l /usr/local/bin/ | field 1 9
+\-rwxr\-xr\-x airbrake*
+\-rwxr\-xr\-x bayes.rb*
+\-rwxr\-xr\-x bourbon*
+
+.B $ cat /etc/mtab | cut -d' ' -f 4 | field -d',' 1 4 3 2
+rw gid=5 nosuid noexec
+rw size=10% nosuid noexec
+rw nodev nosuid noexec
+rw user=root nodev nosuid
+.fi
+.SH AUTHOR
+Written by Trevor Bramwell.
+.SH COPYRIGHT
+Copyright \(co 2015 Trevor Bramwell
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
+.br
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
