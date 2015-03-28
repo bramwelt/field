@@ -1,18 +1,28 @@
 .TH FIELD "1" "March 2015" "field 0.1.0" "User Commands"
 .SH NAME
-field \- extract fields from a file
+\fBfield\fR \- extract fields from a file
 .SH SYNOPSIS
 .B field
-[\-f \fIFILE\fR] [\-d \fIDELIMITER\fR] [\fICOLUMN\fR ...]
+[\fB\-f\fR \fIFILE\fR] [\fB\-d\fR \fIDELIMITER\fR] [\fIFIELD\fR \fI...\fR]
 .SH DESCRIPTION
 .PP
-Field extracts a list of fields or columns from a file. It is a simpler
+\fBfield\fR extracts a list of fields from a file. It is a simpler
 version of:
+.IP
+awk '{ print $5,$3,$1; }'
 .PP
-.B \tawk '{ print $1; }'
-.PP
-Default is to read whitespace (<space><tab>) delimited text from
-\fIstdin\fR and write fields to \fIstdout\fR.
+The default behavior reads whitespace (<space><tab>) delimited text from
+\fIstdin\fR and write fields to \fIstdout\fR. Each \fIFIELD\fR can be
+separated by either commas or spaces, and should take the following
+form:
+.IP "" 4
+.RS
+N
+Field at 1-based index.
+.TP
+N-M
+Range of fields from N to M. Can be increasing or decreasing.
+.RE
 .TP
 \fB\-h\fR, \fB\-\-help\fR
 show concise list of options and exit
@@ -20,11 +30,20 @@ show concise list of options and exit
 \fB\-\-version\fR
 dislay version information and exit
 .TP
-\fB\-f\fR, \fB\-\-file\fR FILE
+\fB\-f\fR, \fB\-\-file\fR \fIFILE\fR
 the file where fields come from
 .TP
-\fB\-d\fR, \fB\-\-delimiter\fR DELIMITER
-character delimiter between fields
+\fB\-d\fR, \fB\-\-delimiter\fR \fIDELIMITER\fR
+character delimiter between fields.
+.SH NOTES
+Field was written to address two short comings of cut:
+.TP
+\fB1.\fR Default Behavior
+The default delimiter of cut is comma, but most command line utilities
+produce space delimited output.
+.TP
+\fB2.\fR Field Ordering
+Fields extracted by cut are not listed in the order they are passed.
 .SH EXAMPLES
 .nf
 .B $ mount | field 5 3 1
