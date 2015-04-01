@@ -11,27 +11,28 @@ version of:
 .IP
 awk '{ print $5,$3,$1; }'
 .PP
-The default behavior reads whitespace (<space><tab>) delimited text from
-\fIstdin\fR and write fields to \fIstdout\fR. Each \fIFIELD\fR can be
-separated by either commas or spaces, and should take the following
-form:
-.IP "" 4
+and similar scripts. Whitespace delimited (space and tab) fields are
+read from \fIstdin\fR and written to \fIstdout\fR.
+
+\fIFIELD\fR is assumed to be 1-indexed integer, separated by commas
+and/or spaces, and take the following form:
 .RS
+.TP
 N
-Field at 1-based index.
+a single field.
 .TP
 N-M
-Range of fields from N to M. Can be increasing or decreasing.
+a range of increasing or decreasing fields from N to M.
 .RE
 .TP
 \fB\-h\fR, \fB\-\-help\fR
 show concise list of options and exit
 .TP
 \fB\-\-version\fR
-dislay version information and exit
+display version information and exit
 .TP
 \fB\-f\fR, \fB\-\-file\fR \fIFILE\fR
-the file where fields come from
+an explicit file to extract fields
 .TP
 \fB\-d\fR, \fB\-\-delimiter\fR \fIDELIMITER\fR
 character delimiter between fields.
@@ -39,8 +40,10 @@ character delimiter between fields.
 Field was written to address two short comings of cut:
 .TP
 \fB1.\fR Default Behavior
-The default delimiter of cut is comma, but most command line utilities
-produce space delimited output.
+The default delimiter of cut is tab. Most command line utilities produce
+output delimited by whitespace, which includes spaces. Field takes this
+into account and defaults the delimiter to both tab and space
+characters.
 .TP
 \fB2.\fR Field Ordering
 Fields extracted by cut are not listed in the order they are passed.
