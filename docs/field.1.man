@@ -35,7 +35,7 @@ display version information and exit
 an explicit file to extract fields
 .TP
 \fB\-d\fR, \fB\-\-delimiter\fR \fIDELIMITER\fR
-character delimiter between fields.
+character delimiter between fields
 .SH NOTES
 Field was written to address two short comings of cut:
 .TP
