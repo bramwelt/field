@@ -40,11 +40,11 @@ parser.add_argument('--version',
         action='version',
         version="field %s%s\nWritten by Trevor Bramwell." %
             (field_version, textwrap.dedent(license_text)),
-        help='dislay the version number and exit')
+        help='dislay version information and exit')
 
 parser.add_argument(
     '-f', '--file', dest='filename', metavar='FILE', default=sys.stdin,
-    type=FileType('r'), help='the file where fields come from')
+    type=FileType('r'), help='an explicit file to extract fields')
 
 def column_converter(string):
     """
@@ -71,12 +71,12 @@ def column_converter(string):
     return [int(column)]
 
 parser.add_argument(
-    'columns', default=None, action='append',
+    'columns', default=None, metavar='FIELD', action='append',
     nargs='*', type=column_converter)
 
 parser.add_argument(
     '-d', '--delimiter', default=None,
-    help='delimiter between fields', type=str)
+    help='character delimiter between fields', type=str)
 
 
 def split_line(lines, delim):
