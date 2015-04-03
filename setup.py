@@ -49,5 +49,5 @@ setup(
             'field=field:main',
         ],
     },
-    data_files=[('/usr/share/man/man1/', ['docs/field.1.gz'])]
+    data_files=[('man/man1', ['docs/field.1.gz'])]
 )
