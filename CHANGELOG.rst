@@ -7,6 +7,8 @@ CHANGELOG
 * field arguments can be now be listed as either a single field, or an
   increasing or decreasing range.
 
+* Manpage included with package.
+
 * Added ``-v, --version`` option for displaying version and license
   information.
 
