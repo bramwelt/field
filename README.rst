@@ -47,15 +47,15 @@ Field was written to address two short comings of cut:
 
 1. Default Behavior
 
-The default delimiter of cut is tab. Most command line utilities
-produce  output  delimited by whitespace, which includes spaces.
-Field takes this into account and defaults the delimiter to both
-tab and space characters.
+   The default delimiter of cut is tab. Most command line utilities
+   produce  output  delimited by whitespace, which includes spaces.
+   Field takes this into account and defaults the delimiter to both
+   tab and space characters.
 
 2. Field Ordering
 
-Fields  extracted  by  cut  are not listed in the order they are
-passed.
+   Fields  extracted  by  cut  are not listed in the order they are
+   passed.
 
 EXAMPLES
 --------
