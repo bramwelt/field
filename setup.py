@@ -21,7 +21,7 @@ from setuptools import setup
 setup(
     name='field',
     description='Extact fields from a file',
-    version='0.1.0',
+    version='0.2.0',
     license='GPLv3+',
     author='Trevor Bramwell',
     author_email='trevor@bramwell.net',

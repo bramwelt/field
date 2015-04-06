@@ -22,7 +22,7 @@ from argparse import (ArgumentParser, RawDescriptionHelpFormatter,
 from itertools import chain
 
 
-field_version='0.1.0'
+field_version='0.2.0'
 license_text="""
     Copyright (C) 2015 Trevor Bramwell
     License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
