@@ -1,3 +1,3 @@
 #! /bin/bash
 
-groff -Tascii -man field.1.man | gzip > field.1.gz
+gzip -9 < field.1 > field.1.gz
