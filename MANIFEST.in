@@ -1,1 +1,3 @@
 include docs/*.man
+include README.rst CHANGELOG.rst
+include LICENSE
