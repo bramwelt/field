@@ -40,7 +40,7 @@ parser.add_argument('--version',
         action='version',
         version="field %s%s\nWritten by Trevor Bramwell." %
             (field_version, textwrap.dedent(license_text)),
-        help='dislay version information and exit')
+        help='display version information and exit')
 
 parser.add_argument(
     '-f', '--file', dest='filename', metavar='FILE', default=sys.stdin,

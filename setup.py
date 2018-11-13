@@ -20,7 +20,7 @@ from setuptools import setup
 
 setup(
     name='field',
-    description='Extact fields from a file',
+    description='Extract fields from a file',
     version='0.2.0',
     license='GPLv3+',
     author='Trevor Bramwell',
